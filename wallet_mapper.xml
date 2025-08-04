@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.wallet.mapper.WalletBalanceMapper">
+
+    <!-- 钱包余额表结果映射 -->
+    <resultMap id="WalletBalanceResultMap" type="com.example.wallet.entity.WalletBalance">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="wallet_id" property="walletId" jdbcType="VARCHAR"/>
+        <result column="center_balance" property="centerBalance" jdbcType="DECIMAL"/>
+        <result column="venue_balance" property="venueBalance" jdbcType="DECIMAL"/>
+        <result column="total_balance" property="totalBalance" jdbcType="DECIMAL"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 根据钱包ID查询余额 -->
+    <select id="selectByWalletId" parameterType="string" resultMap="WalletBalanceResultMap">
+        SELECT id, wallet_id, center_balance, venue_balance, total_balance, version, created_at, updated_at
+        FROM wallet_balance
+        WHERE wallet_id = #{walletId}
+    </select>
+
+    <!-- 使用乐观锁更新余额 -->
+    <update id="updateBalanceWithVersion">
+        UPDATE wallet_balance
+        SET center_balance = #{centerBalance},
+            venue_balance = #{venueBalance},
+            version = version + 1,
+            updated_at = CURRENT_TIMESTAMP
+        WHERE wallet_id = #{walletId} AND version = #{version}
+    </update>
+
+    <!-- 普通更新余额（配合分布式锁使用） -->
+    <update id="updateBalance">
+        UPDATE wallet_balance
+        SET center_balance = #{centerBalance},
+            venue_balance = #{venueBalance},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE wallet_id = #{walletId}
+    </update>
+
+    <!-- 插入新钱包余额记录 -->
+    <insert id="insert" parameterType="com.example.wallet.entity.WalletBalance">
+        INSERT INTO wallet_balance (wallet_id, center_balance, venue_balance, version)
+        VALUES (#{walletId}, #{centerBalance}, #{venueBalance}, 0)
+    </insert>
+
+    <!-- 批量查询钱包余额 -->
+    <select id="selectByWalletIds" parameterType="list" resultMap="WalletBalanceResultMap">
+        SELECT id, wallet_id, center_balance, venue_balance, total_balance, version, created_at, updated_at
+        FROM wallet_balance
+        WHERE wallet_id IN
+        <foreach collection="list" item="walletId" open="(" separator="," close=")">
+            #{walletId}
+        </foreach>
+    </select>
+
+    <!-- 查询总余额大于指定金额的钱包 -->
+    <select id="selectByMinTotalBalance" parameterType="decimal" resultMap="WalletBalanceResultMap">
+        SELECT id, wallet_id, center_balance, venue_balance, total_balance, version, created_at, updated_at
+        FROM wallet_balance
+        WHERE (center_balance + venue_balance) >= #{minBalance}
+        ORDER BY total_balance DESC
+    </select>
+
+</mapper>
+
+<!-- 中心钱包Mapper -->
+<mapper namespace="com.example.wallet.mapper.CenterWalletMapper">
+
+    <resultMap id="CenterWalletBalanceResultMap" type="com.example.wallet.entity.CenterWalletBalance">
+        <id column="wallet_id" property="walletId" jdbcType="VARCHAR"/>
+        <result column="balance" property="balance" jdbcType="DECIMAL"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectByWalletId" parameterType="string" resultMap="CenterWalletBalanceResultMap">
+        SELECT wallet_id, balance, version, created_at, updated_at
+        FROM center_wallet_balance
+        WHERE wallet_id = #{walletId}
+    </select>
+
+    <update id="updateBalanceWithVersion">
+        UPDATE center_wallet_balance
+        SET balance = #{balance},
+            version = version + 1,
+            updated_at = CURRENT_TIMESTAMP
+        WHERE wallet_id = #{walletId} AND version = #{version}
+    </update>
+
+    <insert id="insert" parameterType="com.example.wallet.entity.CenterWalletBalance">
+        INSERT INTO center_wallet_balance (wallet_id, balance, version)
+        VALUES (#{walletId}, #{balance}, 0)
+    </insert>
+
+</mapper>
+
+<!-- 场馆钱包Mapper -->
+<mapper namespace="com.example.wallet.mapper.VenueWalletMapper">
+
+    <resultMap id="VenueWalletBalanceResultMap" type="com.example.wallet.entity.VenueWalletBalance">
+        <id column="wallet_id" property="walletId" jdbcType="VARCHAR"/>
+        <result column="balance" property="balance" jdbcType="DECIMAL"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectByWalletId" parameterType="string" resultMap="VenueWalletBalanceResultMap">
+        SELECT wallet_id, balance, version, created_at, updated_at
+        FROM venue_wallet_balance
+        WHERE wallet_id = #{walletId}
+    </select>
+
+    <update id="updateBalanceWithVersion">
+        UPDATE venue_wallet_balance
+        SET balance = #{balance},
+            version = version + 1,
+            updated_at = CURRENT_TIMESTAMP
+        WHERE wallet_id = #{walletId} AND version = #{version}
+    </update>
+
+    <insert id="insert" parameterType="com.example.wallet.entity.VenueWalletBalance">
+        INSERT INTO venue_wallet_balance (wallet_id, balance, version)
+        VALUES (#{walletId}, #{balance}, 0)
+    </insert>
+
+</mapper>
+
+<!-- 钱包交易记录Mapper -->
+<mapper namespace="com.example.wallet.mapper.WalletTransactionMapper">
+
+    <resultMap id="WalletTransactionResultMap" type="com.example.wallet.entity.WalletTransaction">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="transaction_id" property="transactionId" jdbcType="VARCHAR"/>
+        <result column="wallet_id" property="walletId" jdbcType="VARCHAR"/>
+        <result column="transaction_type" property="transactionType" jdbcType="VARCHAR"/>
+        <result column="wallet_type" property="walletType" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="before_balance" property="beforeBalance" jdbcType="DECIMAL"/>
+        <result column="after_balance" property="afterBalance" jdbcType="DECIMAL"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 插入交易记录 -->
+    <insert id="insert" parameterType="com.example.wallet.entity.WalletTransaction">
+        INSERT INTO wallet_transaction (
+            transaction_id, wallet_id, transaction_type, wallet_type, 
+            amount, before_balance, after_balance, status, remark
+        ) VALUES (
+            #{transactionId}, #{walletId}, #{transactionType}, #{walletType},
+            #{amount}, #{beforeBalance}, #{afterBalance}, #{status}, #{remark}
+        )
+    </insert>
+
+    <!-- 根据钱包ID查询交易记录 -->
+    <select id="selectByWalletId" parameterType="map" resultMap="WalletTransactionResultMap">
+        SELECT id, transaction_id, wallet_id, transaction_type, wallet_type,
+               amount, before_balance, after_balance, status, remark, created_at, updated_at
+        FROM wallet_transaction
+        WHERE wallet_id = #{walletId}
+        <if test="walletType != null">
+            AND wallet_type = #{walletType}
+        </if>
+        <if test="transactionType != null">
+            AND transaction_type = #{transactionType}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY created_at DESC
+        <if test="limit != null">
+            LIMIT #{limit}
+        </if>
+        <if test="offset != null">
+            OFFSET #{offset}
+        </if>
+    </select>
+
+    <!-- 根据交易ID查询 -->
+    <select id="selectByTransactionId" parameterType="string" resultMap="WalletTransactionResultMap">
+        SELECT id, transaction_id, wallet_id, transaction_type, wallet_type,
+               amount, before_balance, after_balance, status, remark, created_at, updated_at
+        FROM wallet_transaction
+        WHERE transaction_id = #{transactionId}
+    </select>
+
+    <!-- 更新交易状态 -->
+    <update id="updateStatus">
+        UPDATE wallet_transaction
+        SET status = #{status},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE transaction_id = #{transactionId}
+    </update>
+
+    <!-- 统计钱包交易金额 -->
+    <select id="sumAmountByWalletId" parameterType="map" resultType="decimal">
+        SELECT COALESCE(SUM(amount), 0)
+        FROM wallet_transaction
+        WHERE wallet_id = #{walletId}
+        <if test="walletType != null">
+            AND wallet_type = #{walletType}
+        </if>
+        <if test="transactionType != null">
+            AND transaction_type = #{transactionType}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="startTime != null">
+            AND created_at >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND created_at <= #{endTime}
+        </if>
+    </select>
+
+    <!-- 批量插入交易记录 -->
+    <insert id="batchInsert" parameterType="list">
+        INSERT INTO wallet_transaction (
+            transaction_id, wallet_id, transaction_type, wallet_type,
+            amount, before_balance, after_balance, status, remark
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.transactionId}, #{item.walletId}, #{item.transactionType}, #{item.walletType},
+             #{item.amount}, #{item.beforeBalance}, #{item.afterBalance}, #{item.status}, #{item.remark})
+        </foreach>
+    </insert>
+
+</mapper>
