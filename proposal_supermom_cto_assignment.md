@@ -1,4 +1,4 @@
-# Supermom 下一代平台技术愿景与落地方案（CTO Candidate Assignment）
+# Supermom 下一代平台技术愿景与落地方案 
 
 ## 执行摘要（Executive Summary）
 - 愿景：将 Supermom 从现有 B2B2C 营销平台，升级为“Agentic AI + 社区驱动 + 代币经济”的下一代生态，既服务妈妈（B2C），又赋能品牌（B2B）。
