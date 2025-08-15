@@ -56,7 +56,7 @@
 flowchart TB
   subgraph Clients[体验层]
     A[Mobile App ]
-    B[Web (Next.js)]
+    B[Web ]
     C[WhatsApp/LINE]
   end
   A & B & C --> G[API Gateway/BFF]
