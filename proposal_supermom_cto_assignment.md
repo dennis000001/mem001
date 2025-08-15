@@ -51,6 +51,7 @@
     - 代理编排：Agent Orchestrator（LangGraph/Semantic Kernel）、工具集（Tools）与安全护栏（Guardrails）。
   - 基础设施与运维：Kubernetes（EKS/GKE）、消息总线（Kafka/PubSub）、Cache（Redis）、OLTP（Postgres）、对象存储（S3/GCS）、日志/追踪（OpenTelemetry + Grafana Tempo/Loki + Prometheus）。
 - 高层架构图：
+
 ```mermaid
 flowchart TB
   subgraph Clients[体验层]
@@ -95,6 +96,7 @@ flowchart TB
 
   G <-.-> O[Observability & SecOps]
 ```
+
 - 技术栈建议：
   - 前端：React Native（Expo EAS）、Next.js（App Router）、TypeScript、Tailwind/NativeWind、i18n-next。
   - 后端：TypeScript（NestJS）为主、Python（FastAPI）用于数据处理/ML 服务。
