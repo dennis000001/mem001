@@ -3,6 +3,7 @@
 用于融资PPT/产品宣讲：中心为“妈妈”，周围六大模块，外圈为“AI 核心引擎”。可复制到 Mermaid Live 或直接在 GitHub 查看渲染。
 
 ```mermaid
+
 flowchart TB
   %% Center
   MOM((妈妈\nMom))
@@ -10,9 +11,9 @@ flowchart TB
   %% Six Modules (A–F)
   subgraph A[生活助手 & 家务管理]
     direction TB
-    A1[AI 智能日程管理\n(作息/日程/购物/医生预约)]
-    A2[AI 菜谱推荐 & 营养规划\n(本地饮食/预算/替代食材)]
-    A3[家庭预算 & 支出追踪\n(多币种/自动分类/省钱技巧)]
+    A1[AI 智能日程管理 (作息/日程/购物/医生预约)]
+    A2[AI 菜谱推荐 & 营养规划 (本地饮食/预算/替代食材)]
+    A3[家庭预算 & 支出追踪 (多币种/自动分类/省钱技巧)]
   end
 
   subgraph B[育儿与教育支持]
