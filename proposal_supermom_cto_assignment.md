@@ -55,7 +55,7 @@
 ```mermaid
 flowchart TB
   subgraph Clients[体验层]
-    A[Mobile App (RN)]
+    A[Mobile App ]
     B[Web (Next.js)]
     C[WhatsApp/LINE]
   end
