@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SuperMom AI for 1M Moms - Style Guide</title>
+  <style>
+    :root {
+      --primary: #6F52ED;
+      --primary-hover: #5C3FE3;
+      --accent: #FF8A65;
+      --success: #22C55E;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --info: #2563EB;
+      --text: #111111;
+      --subtext: #666666;
+      --divider: #EAEAEA;
+      --bg: #FFFFFF;
+      --bg-soft: #F7F7FB;
+      --radius-card: 12px;
+      --radius-input: 10px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 24px; background: var(--bg-soft);
+      color: var(--text); font-family: Inter, "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans CJK", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    }
+    h1 { font-size: 24px; margin: 0 0 16px; }
+    h2 { font-size: 18px; margin: 24px 0 12px; }
+    p { margin: 8px 0; color: var(--subtext); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .card { background: var(--bg); border-radius: var(--radius-card); box-shadow: var(--shadow); padding: 16px; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 10px; font-size: 12px; }
+    .row { display: flex; align-items: center; gap: 8px; }
+    .muted { color: var(--subtext); }
+    .divider { height: 1px; background: var(--divider); margin: 12px 0; }
+    .chip { display:inline-flex; align-items:center; padding:6px 10px; border-radius: 999px; background: var(--bg-soft); font-size: 12px; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      background: var(--primary); color:#fff; padding:10px 14px; border:none; border-radius: 10px; cursor:pointer; font-weight: 600;
+    }
+    .btn:hover { background: var(--primary-hover); }
+
+    /* Specific components */
+    .header { display:flex; align-items:center; justify-content:space-between; }
+    .header .title { font-weight: 700; font-size: 18px; }
+    .header .search { flex:1; margin: 0 12px; }
+    .input { width:100%; padding:10px 12px; border:1px solid var(--divider); border-radius: var(--radius-input); background:#fff; }
+
+    .stage-row { display:flex; gap:8px; flex-wrap: wrap; }
+    .stage-chip { padding:8px 10px; border-radius: 999px; font-size: 12px; font-weight:600; }
+    .stage-prep { background:#EDE7FF; color:#4B32C3; }
+    .stage-preg { background:#E3F2FD; color:#0B64D6; }
+    .stage-baby { background:#E6F7F1; color:#108B57; }
+
+    .trust { display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:4px 8px; border-radius: 999px; background:#F3F4F6; }
+    .trust.gov { background:#EEF2FF; color:#3730A3; }
+    .trust.hospital { background:#ECFEFF; color:#0369A1; }
+    .trust.assoc { background:#FFF7ED; color:#9A3412; }
+
+    .price { display:flex; align-items:baseline; gap:8px; }
+    .price .now { font-size: 20px; font-weight: 700; color: var(--primary); }
+    .price .orig { text-decoration: line-through; color: var(--subtext); }
+    .spark { width: 80px; height: 28px; background: linear-gradient(180deg,#fff, #f5f5f5); border-radius: 6px; border:1px solid var(--divider); position: relative; }
+    .spark::after { content:""; position:absolute; left:8px; right:8px; top:6px; bottom:6px; border-left:2px solid #E5E7EB; border-right:2px solid #E5E7EB; }
+
+    .dealpath { display:flex; align-items:center; gap:6px; flex-wrap: wrap; }
+    .dealpath .pill { padding:6px 10px; background:#F1F5F9; border-radius:999px; font-size:12px; }
+
+    .benefit-list li { margin: 4px 0; }
+
+    .timeline { display:flex; flex-direction:column; gap:12px; }
+    .timeline-item { display:flex; gap:12px; }
+    .timeline-dot { width:10px; height:10px; background: var(--primary); border-radius: 999px; margin-top: 6px; }
+
+    .answer .points li { margin:6px 0; }
+
+    .consent { display:flex; flex-direction:column; gap:8px; }
+    .toggle { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border:1px solid var(--divider); border-radius: 10px; }
+    .switch { width: 40px; height: 22px; background:#CBD5E1; border-radius: 999px; position:relative; }
+    .switch::after { content:""; position:absolute; width:18px; height:18px; background:#fff; border-radius:999px; top:2px; left:2px; }
+    .switch.on { background: var(--primary); }
+    .switch.on::after { left:20px; }
+
+    .toast { display:inline-block; padding:10px 12px; border-radius: 10px; background:#111; color:#fff; }
+    .skeleton { background: linear-gradient(90deg, #eee, #f5f5f5, #eee); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 8px; }
+    @keyframes shimmer { 0%{ background-position: 200% 0 } 100%{ background-position: -200% 0 } }
+  </style>
+</head>
+<body>
+  <h1>SuperMom AI for 1M Moms | Style Guide (Local Preview)</h1>
+  <p>Colors, typography, components and examples. A visual reference for generating UI via UXPilot.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Colors</h2>
+      <div class="row" style="flex-wrap:wrap; gap:10px;">
+        <div class="chip" style="background:var(--primary);color:#fff;">Primary #6F52ED</div>
+        <div class="chip" style="background:var(--primary-hover);color:#fff;">Primary Hover #5C3FE3</div>
+        <div class="chip" style="background:var(--accent);color:#fff;">Accent #FF8A65</div>
+        <div class="chip" style="background:var(--success);color:#fff;">Success</div>
+        <div class="chip" style="background:var(--warning);color:#fff;">Warning</div>
+        <div class="chip" style="background:var(--danger);color:#fff;">Danger</div>
+        <div class="chip" style="background:var(--info);color:#fff;">Info</div>
+      </div>
+      <div class="divider"></div>
+      <p class="muted">Text #111 / Subtext #666; Divider #EAEAEA; BG #FFF / BG-Soft #F7F7FB</p>
+    </div>
+
+    <div class="card">
+      <h2>Header / Search / Language</h2>
+      <div class="header">
+        <div class="title">SuperMom</div>
+        <div class="search" ><input class="input" placeholder="Search: e.g., weekly key points"/></div>
+        <button class="btn">Language</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Stage Badges (StageChip)</h2>
+      <div class="stage-row">
+        <div class="stage-chip stage-prep">Preconception</div>
+        <div class="stage-chip stage-preg">Pregnancy · 32 weeks</div>
+        <div class="stage-chip stage-baby">Baby · 0–3 mo</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Trust Labels</h2>
+      <div class="row" style="gap:10px; flex-wrap:wrap;">
+        <div class="trust gov">Government · MOH</div>
+        <div class="trust hospital">Hospital · KKH</div>
+        <div class="trust assoc">Association · Pediatric Assoc.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Price & Trend (PriceTag + Sparkline)</h2>
+      <div class="price">
+        <div class="now">$23.90</div>
+        <div class="orig">$29.90</div>
+      </div>
+      <div class="muted">Trend:</div>
+      <div class="spark" title="Sparkline"></div>
+    </div>
+
+    <div class="card">
+      <h2>Savings Path (DealPath)</h2>
+      <div class="dealpath">
+        <div class="pill">Shop coupon -$3</div>
+        <div class="pill">Platform coupon -$2</div>
+        <div class="pill">Cashback 5%</div>
+        <div class="pill">Threshold -$5</div>
+        <div class="pill" style="background:#E0E7FF;">Est. net: $18.21</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Benefit Card</h2>
+      <div class="row" style="justify-content:space-between;">
+        <div>
+          <strong>Newborn Subsidy Application</strong>
+          <p class="muted">Documents:</p>
+          <ul class="benefit-list">
+            <li>Birth Certificate</li>
+            <li>Parents' IDs</li>
+            <li>Bank details</li>
+          </ul>
+        </div>
+        <button class="btn">Apply</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Event Card</h2>
+      <div class="row" style="justify-content:space-between;">
+        <div>
+          <strong>SuperMom Baby Fair · Singapore Expo</strong>
+          <p class="muted">Sat 10:00–17:00 · Hall 3</p>
+        </div>
+        <button class="btn">Register</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Timeline & Reminders</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div>
+            <strong>Vaccine: Hep B dose 2</strong>
+            <p class="muted">Aug 20 · Pediatric clinic · Bring immunization card</p>
+            <div class="row"><button class="btn">Done</button><span class="chip">Sync to Calendar</span></div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:var(--warning);"></div>
+          <div>
+            <strong>Subsidy: Childcare allowance</strong>
+            <p class="muted">Submit by Aug 25 · Online portal</p>
+            <div class="row"><button class="btn">Proceed</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card answer">
+      <h2>Answer Card (RAG)</h2>
+      <strong>What to note this pregnancy week?</strong>
+      <ul class="points">
+        <li>Stay hydrated and take gentle walks</li>
+        <li>Prioritize sleep and back support</li>
+        <li>Light diet; monitor weight change</li>
+      </ul>
+      <div class="row" style="gap:10px; flex-wrap:wrap;">
+        <div class="trust hospital">Source: KKH Guide</div>
+        <div class="trust gov">Source: MOH Advice</div>
+      </div>
+      <div class="divider"></div>
+      <div class="row" style="gap:8px;">
+        <span class="chip">Helpful</span>
+        <span class="chip">Not enough</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Consent & Privacy</h2>
+      <div class="consent">
+        <div class="toggle"><span>Personalization</span><span class="switch on"></span></div>
+        <div class="toggle"><span>Price & Cashback Alerts</span><span class="switch"></span></div>
+        <div class="toggle"><span>Benefits & Events</span><span class="switch on"></span></div>
+        <p class="muted">You can withdraw consent anytime in Privacy Settings.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Toast / Skeleton Loader</h2>
+      <div class="row" style="gap:12px; align-items:center;">
+        <span class="toast">Price alert set</span>
+        <div style="width:140px; height:14px;" class="skeleton"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="muted" style="margin-top:24px;">Note: This page is a static sample. Icons and sparkline are placeholders; real product can use icon libraries and microcharts.</p>
+</body>
+</html>

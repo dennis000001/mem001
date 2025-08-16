@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SuperMom AI 服务 100 万妈妈 - 风格指南</title>
+  <style>
+    :root {
+      --primary: #6F52ED;
+      --primary-hover: #5C3FE3;
+      --accent: #FF8A65;
+      --success: #22C55E;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --info: #2563EB;
+      --text: #111111;
+      --subtext: #666666;
+      --divider: #EAEAEA;
+      --bg: #FFFFFF;
+      --bg-soft: #F7F7FB;
+      --radius-card: 12px;
+      --radius-input: 10px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 24px; background: var(--bg-soft);
+      color: var(--text); font-family: Inter, "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans CJK", "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    }
+    h1 { font-size: 24px; margin: 0 0 16px; }
+    h2 { font-size: 18px; margin: 24px 0 12px; }
+    p { margin: 8px 0; color: var(--subtext); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .card { background: var(--bg); border-radius: var(--radius-card); box-shadow: var(--shadow); padding: 16px; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 10px; font-size: 12px; }
+    .row { display: flex; align-items: center; gap: 8px; }
+    .muted { color: var(--subtext); }
+    .divider { height: 1px; background: var(--divider); margin: 12px 0; }
+    .chip { display:inline-flex; align-items:center; padding:6px 10px; border-radius: 999px; background: var(--bg-soft); font-size: 12px; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      background: var(--primary); color:#fff; padding:10px 14px; border:none; border-radius: 10px; cursor:pointer; font-weight: 600;
+    }
+    .btn:hover { background: var(--primary-hover); }
+
+    /* Specific components */
+    .header { display:flex; align-items:center; justify-content:space-between; }
+    .header .title { font-weight: 700; font-size: 18px; }
+    .header .search { flex:1; margin: 0 12px; }
+    .input { width:100%; padding:10px 12px; border:1px solid var(--divider); border-radius: var(--radius-input); background:#fff; }
+
+    .stage-row { display:flex; gap:8px; flex-wrap: wrap; }
+    .stage-chip { padding:8px 10px; border-radius: 999px; font-size: 12px; font-weight:600; }
+    .stage-prep { background:#EDE7FF; color:#4B32C3; }
+    .stage-preg { background:#E3F2FD; color:#0B64D6; }
+    .stage-baby { background:#E6F7F1; color:#108B57; }
+
+    .trust { display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:4px 8px; border-radius: 999px; background:#F3F4F6; }
+    .trust.gov { background:#EEF2FF; color:#3730A3; }
+    .trust.hospital { background:#ECFEFF; color:#0369A1; }
+    .trust.assoc { background:#FFF7ED; color:#9A3412; }
+
+    .price { display:flex; align-items:baseline; gap:8px; }
+    .price .now { font-size: 20px; font-weight: 700; color: var(--primary); }
+    .price .orig { text-decoration: line-through; color: var(--subtext); }
+    .spark { width: 80px; height: 28px; background: linear-gradient(180deg,#fff, #f5f5f5); border-radius: 6px; border:1px solid var(--divider); position: relative; }
+    .spark::after { content:""; position:absolute; left:8px; right:8px; top:6px; bottom:6px; border-left:2px solid #E5E7EB; border-right:2px solid #E5E7EB; }
+
+    .dealpath { display:flex; align-items:center; gap:6px; flex-wrap: wrap; }
+    .dealpath .pill { padding:6px 10px; background:#F1F5F9; border-radius:999px; font-size:12px; }
+
+    .benefit-list li { margin: 4px 0; }
+
+    .timeline { display:flex; flex-direction:column; gap:12px; }
+    .timeline-item { display:flex; gap:12px; }
+    .timeline-dot { width:10px; height:10px; background: var(--primary); border-radius: 999px; margin-top: 6px; }
+
+    .answer .points li { margin:6px 0; }
+
+    .consent { display:flex; flex-direction:column; gap:8px; }
+    .toggle { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border:1px solid var(--divider); border-radius: 10px; }
+    .switch { width: 40px; height: 22px; background:#CBD5E1; border-radius: 999px; position:relative; }
+    .switch::after { content:""; position:absolute; width:18px; height:18px; background:#fff; border-radius:999px; top:2px; left:2px; }
+    .switch.on { background: var(--primary); }
+    .switch.on::after { left:20px; }
+
+    .toast { display:inline-block; padding:10px 12px; border-radius: 10px; background:#111; color:#fff; }
+    .skeleton { background: linear-gradient(90deg, #eee, #f5f5f5, #eee); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 8px; }
+    @keyframes shimmer { 0%{ background-position: 200% 0 } 100%{ background-position: -200% 0 } }
+  </style>
+</head>
+<body>
+  <h1>SuperMom AI 服务 100 万妈妈｜风格指南（本地预览）</h1>
+  <p>颜色、排版、组件与示例。用于指导 UXPilot 生成 UI 的视觉参考。</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>颜色</h2>
+      <div class="row" style="flex-wrap:wrap; gap:10px;">
+        <div class="chip" style="background:var(--primary);color:#fff;">Primary #6F52ED</div>
+        <div class="chip" style="background:var(--primary-hover);color:#fff;">Primary Hover #5C3FE3</div>
+        <div class="chip" style="background:var(--accent);color:#fff;">Accent #FF8A65</div>
+        <div class="chip" style="background:var(--success);color:#fff;">Success</div>
+        <div class="chip" style="background:var(--warning);color:#fff;">Warning</div>
+        <div class="chip" style="background:var(--danger);color:#fff;">Danger</div>
+        <div class="chip" style="background:var(--info);color:#fff;">Info</div>
+      </div>
+      <div class="divider"></div>
+      <p class="muted">文本颜色 #111 / 次级 #666；分隔线 #EAEAEA；背景 #FFF / 软背景 #F7F7FB</p>
+    </div>
+
+    <div class="card">
+      <h2>Header / 搜索 / 语言</h2>
+      <div class="header">
+        <div class="title">SuperMom</div>
+        <div class="search" ><input class="input" placeholder="搜索：例如 本周注意事项"/></div>
+        <button class="btn">语言</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>阶段徽章（StageChip）</h2>
+      <div class="stage-row">
+        <div class="stage-chip stage-prep">备孕</div>
+        <div class="stage-chip stage-preg">孕期 · 32周</div>
+        <div class="stage-chip stage-baby">宝宝 · 0–3月</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>可信来源（TrustLabel）</h2>
+      <div class="row" style="gap:10px; flex-wrap:wrap;">
+        <div class="trust gov">政府 · MOH</div>
+        <div class="trust hospital">医院 · KKH</div>
+        <div class="trust assoc">协会 · Pediatric Assoc.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>价格与趋势（PriceTag + Sparkline）</h2>
+      <div class="price">
+        <div class="now">$23.90</div>
+        <div class="orig">$29.90</div>
+      </div>
+      <div class="muted">历史趋势：</div>
+      <div class="spark" title="Sparkline"></div>
+    </div>
+
+    <div class="card">
+      <h2>省钱路径（DealPath）</h2>
+      <div class="dealpath">
+        <div class="pill">店铺券 -$3</div>
+        <div class="pill">平台券 -$2</div>
+        <div class="pill">返利 5%</div>
+        <div class="pill">满减 -$5</div>
+        <div class="pill" style="background:#E0E7FF;">预计到手：$18.21</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>福利卡（BenefitCard）</h2>
+      <div class="row" style="justify-content:space-between;">
+        <div>
+          <strong>新生儿补贴申请</strong>
+          <p class="muted">所需材料：</p>
+          <ul class="benefit-list">
+            <li>出生证明</li>
+            <li>父母身份证明</li>
+            <li>银行账户信息</li>
+          </ul>
+        </div>
+        <button class="btn">一键申请</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>活动卡（EventCard）</h2>
+      <div class="row" style="justify-content:space-between;">
+        <div>
+          <strong>SuperMom 婴童展 · Singapore Expo</strong>
+          <p class="muted">周六 10:00–17:00 · Hall 3</p>
+        </div>
+        <button class="btn">报名</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>时间轴与提醒（TimelineItem）</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div>
+            <strong>疫苗：乙肝第二针</strong>
+            <p class="muted">8月20日 · 儿保门诊 · 带上接种本</p>
+            <div class="row"><button class="btn">完成</button><span class="chip">同步到日历</span></div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:var(--warning);"></div>
+          <div>
+            <strong>补贴办理：育儿津贴</strong>
+            <p class="muted">8月25日 前 · 在线提交材料</p>
+            <div class="row"><button class="btn">去办理</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card answer">
+      <h2>答案卡（AnswerCard / RAG）</h2>
+      <strong>本周孕期需要注意什么？</strong>
+      <ul class="points">
+        <li>适量运动与补水；避免长时间久坐</li>
+        <li>注意睡眠与腰背支撑</li>
+        <li>保持清淡饮食，监测体重变化</li>
+      </ul>
+      <div class="row" style="gap:10px; flex-wrap:wrap;">
+        <div class="trust hospital">来源：KKH 指南</div>
+        <div class="trust gov">来源：MOH 建议</div>
+      </div>
+      <div class="divider"></div>
+      <div class="row" style="gap:8px;">
+        <span class="chip">有用</span>
+        <span class="chip">不够用</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>同意与隐私（ConsentBlock）</h2>
+      <div class="consent">
+        <div class="toggle"><span>个性化推荐</span><span class="switch on"></span></div>
+        <div class="toggle"><span>价格与返利提醒</span><span class="switch"></span></div>
+        <div class="toggle"><span>活动与福利推荐</span><span class="switch on"></span></div>
+        <p class="muted">你可以随时在“隐私设置”中撤回同意</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Toast / 加载骨架</h2>
+      <div class="row" style="gap:12px; align-items:center;">
+        <span class="toast">已为你设置价格提醒</span>
+        <div style="width:140px; height:14px;" class="skeleton"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="muted" style="margin-top:24px;">注：本页为静态示例，图标与火花线为占位表现，实际产品可接入图标库与微图表。</p>
+</body>
+</html>
